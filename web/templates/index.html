@@ -1,0 +1,55 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <title>Secure QR Verify</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <h2>Secure QR Verification </h2>
+  <div class="card">
+    <form method="post" enctype="multipart/form-data">
+      <label>QR image: <input type="file" name="qrfile" accept="image/*" required></label><br><br>
+      <label>HMAC Key (if used): <input type="text" name="key" placeholder="optional"></label><br><br>
+      <button type="submit">Verify</button>
+    </form>
+
+    <p class="hint">This tool verifies secure QR codes produced by the Secure-QR project. Normal phone apps may show raw base64; use this tool to decode + verify.</p>
+  </div>
+
+  {% if result %}
+  <div class="card" style="margin-top:16px;">
+    <h3>Result</h3>
+    {% if result.valid %}
+      <p class="valid">✅ Valid — message not tampered.</p>
+    {% else %}
+      <p class="invalid">❌ Invalid / Tampered</p>
+      {% if result.reason %}
+        <p><strong>Reason:</strong> {{ result.reason }}</p>
+      {% endif %}
+    {% endif %}
+
+    {% if result.valid %}
+    <p><strong>Message:</strong><br>
+      <pre style="white-space:pre-wrap;">{{ result.message }}</pre>
+    </p>
+    {% endif %}
+
+    {% if result.meta %}
+      <div class="meta">
+        <p><strong>Meta:</strong></p>
+        <ul>
+        {% for k,v in result.meta.items() %}
+          <li>{{k}}: {{v}}</li>
+        {% endfor %}
+        </ul>
+      </div>
+    {% endif %}
+
+    {% if result.valid and result.is_file and result.download_name %}
+      <p><a href="{{ url_for('download', name=result.download_name) }}">Download restored file</a></p>
+    {% endif %}
+  </div>
+  {% endif %}
+</body>
+</html>
