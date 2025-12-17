@@ -1,0 +1,103 @@
+# General
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Python
+# virtual envs
+venv/
+env/
+.venv/
+ENV/
+/.venv
+
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# C extensions
+*.so
+
+# Distribution / packaging
+build/
+dist/
+*.egg-info/
+pip-wheel-metadata/
+*.egg
+
+# Installer logs
+pip-log.txt
+pip-delete-this-directory.txt
+
+# Unit test / coverage reports
+.pytest_cache/
+htmlcov/
+.coverage
+.coverage.*
+coverage.xml
+*.cover
+
+# mypy
+.mypy_cache/
+
+# PyCharm / IDEs
+.idea/
+.vscode/
+*.sublime-project
+*.sublime-workspace
+
+# macOS
+.DS_Store
+
+# Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# Logs
+*.log
+
+# Local env files
+.env
+.env.*
+
+# Generated archives
+*.zip
+*.tar.gz
+*.egg
+
+# Python compiled artifacts
+*.pyc
+
+# Go
+# vendor directory
+vendor/
+
+# Go build outputs
+bin/
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+
+# Go test cache
+$GOCACHE
+
+# Go modules
+go.sum
+
+# Node (if any frontend)
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Editor backups
+*~
+*.swp
+
+# Project summary - local only
+PROJECT_FILES_SUMMARY.md
+
