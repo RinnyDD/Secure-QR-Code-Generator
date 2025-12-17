@@ -8,6 +8,7 @@ from pathlib import Path
 
 from pyzbar.pyzbar import decode as qr_decode
 from PIL import Image
+from urllib.parse import urlparse, parse_qs
     
 from crypto_utils import compute_hash, compute_hmac
 
@@ -18,6 +19,16 @@ def decode_qr_image(img_path: Path) -> str:
         raise RuntimeError("No QR code found in image.")
     # Use the first QR payload
     raw = decoded[0].data.decode('utf-8')
+    # If the QR contains a URL with our payload in a query parameter (e.g. ?data=...)
+    # extract and return just the payload. Otherwise return the raw string.
+    try:
+        p = urlparse(raw)
+        if p.scheme in ('http', 'https'):
+            qs = parse_qs(p.query)
+            if 'data' in qs and qs['data']:
+                return qs['data'][0]
+    except Exception:
+        pass
     return raw
 
 def verify_payload(payload_b64: str, key: str | None = None):

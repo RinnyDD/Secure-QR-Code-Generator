@@ -5,6 +5,7 @@ import tempfile
 import base64
 import io
 import sys
+from PIL import Image
 
 # Make sure src/ is importable (adjust path)
 sys.path.append(str(Path(__file__).resolve().parents[1] / "src"))
@@ -34,6 +35,19 @@ def index():
         try:
             payload = decode_qr_image(tmp_path)
         except Exception as e:
+            # If the uploaded image contains no QR, show a friendly message
+            msg = str(e)
+            if 'No QR code found' in msg or 'No QR' in msg:
+                result = {
+                    "valid": False,
+                    "message": None,
+                    "meta": None,
+                    "reason": "This is not the qrcode",
+                    "is_file": False,
+                    "download_name": None,
+                }
+                return render_template("index.html", result=result)
+            # otherwise fall back to flashing the error
             flash(f"Failed to decode QR: {e}", "error")
             return redirect(url_for("index"))
 

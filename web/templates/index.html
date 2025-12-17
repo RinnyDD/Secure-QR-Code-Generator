@@ -5,17 +5,31 @@
   <title>Secure QR Verify</title>
   <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
-<body>
-  <h2>Secure QR Verification </h2>
-  <div class="card">
-    <form method="post" enctype="multipart/form-data">
-      <label>QR image: <input type="file" name="qrfile" accept="image/*" required></label><br><br>
-      <label>HMAC Key (if used): <input type="text" name="key" placeholder="optional"></label><br><br>
-      <button type="submit">Verify</button>
-    </form>
+<body {% if result %}class="{% if result.valid %}state-valid{% else %}state-invalid{% endif %}"{% endif %}>
+  <div class="app">
+    <div class="topbar">
+      <div class="brand">
+        <div class="logo">
+          <img src="{{ url_for('static', filename='logo.png') }}" alt="Secure QR logo">
+        </div>
+        <div>
+          <div class="title">Secure QR Verification</div>
+          <div class="subtitle">Decode and verify secure QR payloads</div>
+        </div>
+      </div>
+    </div>
 
-    <p class="hint">This tool verifies secure QR codes produced by the Secure-QR project. Normal phone apps may show raw base64; use this tool to decode + verify.</p>
-  </div>
+    <div class="card">
+      <form method="post" enctype="multipart/form-data">
+        <div class="controls">
+          <label>QR image: <input type="file" name="qrfile" accept="image/*" required></label>
+          <label>HMAC Key (if used): <input type="text" name="key" placeholder="optional"></label>
+          <button type="submit" class="btn btn-lg">Verify</button>
+        </div>
+      </form>
+
+      <p class="hint">This tool verifies secure QR codes produced by the Secure-QR project. Normal phone apps may show raw base64; use this tool to decode + verify.</p>
+    </div>
 
   {% if result %}
   <div class="card" style="margin-top:16px;">
@@ -51,5 +65,6 @@
     {% endif %}
   </div>
   {% endif %}
+  </div>
 </body>
 </html>
