@@ -88,6 +88,31 @@ $GOCACHE
 # Go modules
 go.sum
 
+# Additional common ignores (libraries, caches, packaging)
+# pipenv / poetry
+Pipfile.lock
+poetry.lock
+
+# site-packages (if someone accidentally copies env site-packages)
+site-packages/
+
+# local python installs
+Scripts/
+
+# wheel, egg caches
+*.egg-info/
+dist/
+
+# Go package objects
+pkg/
+
+# Godeps (old GOPATH dep folders)
+Godeps/
+
+# go-build directories
+_build/
+
+
 # Node (if any frontend)
 node_modules/
 npm-debug.log*

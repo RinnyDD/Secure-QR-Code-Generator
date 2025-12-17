@@ -31,6 +31,11 @@ python web\app.py
 The web page lets you upload a QR image and enter the optional HMAC key.
 If the QR is valid and contains a binary file, a download link appears.
 
+## Libraries
+- Python libraries are listed in `requirements.txt`.
+- If you use `pipenv` or `poetry`, lock files are `Pipfile.lock` or `poetry.lock`.
+- Do not commit virtual environments or library folders (for example: `venv/`, `.venv/`, `site-packages/`, `vendor/`). These are ignored by `.gitignore`.
+
 ## CLI usage
 The CLI script is `src\main.py`.
 
