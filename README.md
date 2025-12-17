@@ -1,2 +1,87 @@
+# Secure QR Code Generator
+
+Simple tool to create and verify secure QR payloads.
+
+This project can pack text or small files into a QR image and verify the QR payload.
+
+## Features
+- Encode text or a small file into a QR image.
+- Verify QR payloads and check integrity (HMAC or SHA-256).
+- CLI and a simple web UI to upload and verify QR images.
+- If a verified payload is a binary file, the tool saves a restored file.
+
+## Limitations
+- QR codes have size limits. Large images or big files may not fit in one QR.
+- Do not expect to store multi-megabyte files in a single QR.
+
+## Install
+Open PowerShell and run:
+
+```powershell
+python -m pip install -r requirements.txt
+```
+
+## Run the web UI
+Start the web app and open http://localhost:5000 in your browser.
+
+```powershell
+python web\app.py
+```
+
+The web page lets you upload a QR image and enter the optional HMAC key.
+If the QR is valid and contains a binary file, a download link appears.
+
+## CLI usage
+The CLI script is `src\main.py`.
+
+Encode examples:
+
+```powershell
+# encode simple text to a PNG
+python src/main.py encode --text "Hello world" --out hello.png
+
+# encode a small file (txt/pdf) into a QR
+python src/main.py encode --infile secret.txt --out secret_qr.png
+
+# encode with a secret key (HMAC)
+python src/main.py encode --text "secret" --out myqr.png --key mysecret
+```
+
+Decode / verify example:
+
+```powershell
+python src/main.py decode --img secret_qr.png
+
+# if the QR used an HMAC key:
+python src/main.py decode --img secret_qr.png --key mysecret
+```
+
+Notes:
+- Generated QR images are copied to `assets\qrCode\`.
+- If the verified payload is binary, the CLI writes `restored.bin` in the current folder.
+
+## Tests
+Run tests with `pytest` from the project root:
+
+```powershell
+pytest -q
+```
+
+## Troubleshooting
+- If you see an error about payload size, the data is too large for a single QR. Use a smaller file or shorter text.
+- If the web UI says "This is not the qrcode", the uploaded image has no QR code or pyzbar could not detect it.
+
+## Security notes
+- If you use `--key`, HMAC is used to protect integrity. Keep keys secret.
+- The app is for demo use. Do not run the web UI in production without changing secrets and adding real security.
+
+## Where to look in the code
+- CLI: `src\main.py`
+- QR generation: `src\qr_generator.py`
+- Verification: `src\qr_verify.py`
+- Web UI: `web\app.py` and `web\templates\index.html`
+- Static files: `web\static\` (CSS and `logo.png`)
+
+If you want changes to wording or more examples, tell me and I will update this file.
 # Secure-QR-Code-Generator
 the tool can help you generate a secure QR code for everyday use without worrying about hacker changing or QR data.
