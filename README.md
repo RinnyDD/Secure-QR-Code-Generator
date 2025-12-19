@@ -80,13 +80,6 @@ pytest -q
 - If you use `--key`, HMAC is used to protect integrity. Keep keys secret.
 - The app is for demo use. Do not run the web UI in production without changing secrets and adding real security.
 
-## Where to look in the code
-- CLI: `src\main.py`
-- QR generation: `src\qr_generator.py`
-- Verification: `src\qr_verify.py`
-- Web UI: `web\app.py` and `web\templates\index.html`
-- Static files: `web\static\` (CSS and `logo.png`)
-
-If you want changes to wording or more examples, tell me and I will update this file.
-# Secure-QR-Code-Generator
-the tool can help you generate a secure QR code for everyday use without worrying about hacker changing or QR data.
+## Note 
+This project focuses on integrity verification rather than data confidentiality. 
+Encryption is intentionally excluded to keep the system simple and aligned with project scope.

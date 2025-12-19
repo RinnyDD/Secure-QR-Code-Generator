@@ -48,6 +48,7 @@ def _make_payload_bytes(message_bytes: bytes, key: str | None):
 
 
 def _embed_payload_in_url(url: str, payload_b64: str, param_name: str = 'data') -> str:
+    
     """Return `url` with the secure payload added as query parameter `param_name`.
 
     If the URL already has query parameters, the payload is appended/overwrites the
