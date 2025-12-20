@@ -127,9 +127,8 @@ yarn-error.log*
 PROJECT_FILES_SUMMARY.md
 
 # Ignore upload and QR code asset folders
-/upload/
-/assets/qrCode/
-/qrcode/
+/web/uploads/
+/asset/qrCode/
 
 # local restore file
 restored.bin
