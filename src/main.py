@@ -13,7 +13,8 @@ import sys
 import base64
 from pathlib import Path
 
-from qr_secure import generate_qr_from_text, generate_qr_from_file, decode_qr_image, verify_payload
+from qr_generator import generate_qr_from_text, generate_qr_from_file
+from qr_verifier import decode_qr_image, verify_payload
 
 def cmd_encode(args):
     if not args.text and not args.infile:

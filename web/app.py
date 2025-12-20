@@ -5,7 +5,7 @@ import base64
 import sys
 
 sys.path.append(str(Path(__file__).resolve().parents[1] / "src"))
-from qr_secure import decode_qr_image, verify_payload
+from qr_verifier import decode_qr_image, verify_payload
 
 app = Flask(__name__)
 app.secret_key = "change-this-secret"
