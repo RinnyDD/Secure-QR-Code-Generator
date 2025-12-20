@@ -2,14 +2,13 @@
 from flask import Flask, render_template, request, redirect, url_for, send_file, flash
 from pathlib import Path
 import base64
-import os
 import sys
 
 sys.path.append(str(Path(__file__).resolve().parents[1] / "src"))
 from qr_secure import decode_qr_image, verify_payload
 
 app = Flask(__name__)
-app.secret_key = os.getenv("FLASK_SECRET_KEY", "change-this-secret")
+app.secret_key = "change-this-secret"
 
 UPLOAD_DIR = Path(__file__).resolve().parent / "uploads"
 UPLOAD_DIR.mkdir(parents=True, exist_ok=True)

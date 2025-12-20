@@ -29,13 +29,6 @@ Start the web app and open http://localhost:5000 in your browser.
 python web\app.py
 ```
 
-Optional (recommended): set a Flask secret key via environment variable:
-
-```powershell
-$env:FLASK_SECRET_KEY = "some-random-string"
-python web\app.py
-```
-
 The web page lets you upload a QR image and enter the optional HMAC key.
 If the QR is valid and contains a binary file, a download link appears.
 
