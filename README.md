@@ -7,6 +7,7 @@ This project can pack text or small files into a QR image and verify the QR payl
 ## Features
 - Encode text or a small file into a QR image.
 - Verify QR payloads and check integrity (HMAC or SHA-256).
+- Optional URL embedding: QR can open a website and carry the payload as a `data` query parameter.
 - CLI and a simple web UI to upload and verify QR images.
 - If a verified payload is a binary file, the tool saves a restored file.
 
@@ -31,6 +32,11 @@ python web\app.py
 The web page lets you upload a QR image and enter the optional HMAC key.
 If the QR is valid and contains a binary file, a download link appears.
 
+## Project structure (short)
+- Core logic (generate + verify) is in `src\qr_secure.py`.
+- CLI entrypoint is `src\main.py`.
+- Web UI is `web\app.py` with template in `web\templates\index.html`.
+
 ## Libraries
 - Python libraries are listed in `requirements.txt`.
 - If you use `pipenv` or `poetry`, lock files are `Pipfile.lock` or `poetry.lock`.
@@ -50,6 +56,10 @@ python src/main.py encode --infile secret.txt --out secret_qr.png
 
 # encode with a secret key (HMAC)
 python src/main.py encode --text "secret" --out myqr.png --key mysecret
+
+# encode and embed payload into a clickable URL
+# (scanning with a phone opens the URL; your verifier extracts `data=...`)
+python src/main.py encode --text "Hello" --out link.png --key mysecret --url "https://example.com/view"
 ```
 
 Decode / verify example:
@@ -66,10 +76,10 @@ Notes:
 - If the verified payload is binary, the CLI writes `restored.bin` in the current folder.
 
 ## Tests
-Run tests with `pytest` from the project root:
+Run tests from the project root:
 
 ```powershell
-pytest -q
+python -m pytest -q
 ```
 
 ## Troubleshooting
