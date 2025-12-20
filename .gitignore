@@ -130,6 +130,11 @@ PROJECT_FILES_SUMMARY.md
 /assets/qrCode/
 /web/uploads/
 
+# If you generate QR images into the project root via --out (e.g. msg.png)
+/*.png
+/*.jpg
+/*.jpeg
+
 # local restore file
 restored.bin
 
